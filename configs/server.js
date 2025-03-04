@@ -8,6 +8,7 @@ import { dbConnection } from "./mongo.js";
 import apiLimiter from "../src/middlewares/rate-limit-validator.js";
 import authRoutes from "../src/auth/auth.routes.js"
 import createAdmin from "../src/auth/auth.controller.js";
+import userRoutes from "../src/user/user.routes.js";
 
 const middlewares = (app) => {
     app.use(express.urlencoded({ extended: false }));
@@ -20,6 +21,7 @@ const middlewares = (app) => {
 
 const routes = (app) => {
     app.use("/tiendaVirtual/v1/auth", authRoutes); 
+    app.use("/tiendaVirtual/v1/user", userRoutes);
 };
 
 const conectarDB = async () => {

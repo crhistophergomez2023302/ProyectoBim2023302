@@ -1,7 +1,9 @@
-import { body } from "express-validator";
-import { emailExists, usernameExists, nitExists } from "../helpers/db-validator.js";
+import { body, param } from "express-validator";
+import { emailExists, usernameExists, nitExists, userExists } from "../helpers/db-validator.js";
 import { validarCampos } from "./validate-fields.js";
 import { handleErrors } from "./handle-errors.js";
+import { validateJWT } from "./validate-jwt.js";
+import { hasRoles } from "./validate-roles.js";
 
 export const registerValidator = [
     body("name").notEmpty().withMessage("El nombre es requerido"),
@@ -27,6 +29,43 @@ export const loginValidator = [
     body("email").optional().isEmail().withMessage("No es un email válido"),
     body("username").optional().isString().withMessage("Username es en formáto erróneo"),
     body("password").isLength({ min: 4 }).withMessage("El password debe contener al menos 8 caracteres"),
+    validarCampos,
+    handleErrors
+];
+
+export const getUserByIdValidator = [
+    validateJWT,
+    hasRoles("ADMIN_ROLE"),
+    param("_id").isMongoId().withMessage("No es un ID válido de MongoDB"),
+    param("_id").custom(userExists),
+    validarCampos,
+    handleErrors
+];
+
+export const deleteUserValidator = [
+    validateJWT,
+    hasRoles("ADMIN_ROLE"),
+    param("_id").isMongoId().withMessage("No es un ID válido de MongoDB"),
+    param("_id").custom(userExists),
+    validarCampos,
+    handleErrors
+];
+
+export const updatePasswordValidator = [
+    validateJWT,
+    hasRoles("ADMIN_ROLE"),
+    param("_id").isMongoId().withMessage("No es un ID válido de MongoDB"),
+    param("_id").custom(userExists),
+    body("newPassword").isLength({ min: 8 }).withMessage("El password debe contener al menos 8 caracteres"),
+    validarCampos,
+    handleErrors
+];
+
+export const updateUserValidator = [
+    validateJWT,
+    hasRoles("ADMIN_ROLE"),
+    param("_id", "No es un ID válido").isMongoId(),
+    param("_id").custom(userExists),
     validarCampos,
     handleErrors
 ];
