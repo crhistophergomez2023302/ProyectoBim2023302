@@ -1,0 +1,26 @@
+[{
+  "_id": {
+    "$oid": "67c63318a451f9fb795b9d44"
+  },
+  "name": "Admin",
+  "surname": "Nimda",
+  "username": "Admin1",
+  "email": "Admin@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$ddj2TqVBnUWm0C3wTTwRPQ$ZCUSfjADw2JgASXsnHwQxEmoCai8+iR+sbkiLxKOSbo",
+  "nit": 87654321,
+  "role": "ADMIN_ROLE",
+  "status": true
+},
+{
+  "_id": {
+    "$oid": "67c78663be9c372b5b697cd3"
+  },
+  "name": "ola",
+  "surname": "comoestas",
+  "username": "ola",
+  "email": "ola@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$IZIqwIhtMdrYLLw4mSiw+A$DX75YTnVnqWSQAm8ZC6TgM9bOhv2K1XisTmhurzIWr4",
+  "nit": 45678912,
+  "role": "ADMIN_ROLE",
+  "status": true
+}]

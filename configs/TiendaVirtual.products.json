@@ -1,0 +1,95 @@
+[{
+  "_id": {
+    "$oid": "67c8c2c4c52c4c91c63c5a45"
+  },
+  "name": "Salchichas",
+  "description": "Salchichas de cerdo",
+  "price": 1.2,
+  "stock": 800,
+  "category": {
+    "$oid": "67c8c21bc52c4c91c63c5a42"
+  },
+  "status": true,
+  "createdAt": {
+    "$date": "2025-03-05T21:31:48.951Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-05T22:09:52.570Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67c8cd806f48fda68723b165"
+  },
+  "name": "Nevera LG",
+  "description": "Nevera LG de 300L con sistema de ahorro de energía y función de congelación rápida.",
+  "price": 15000,
+  "stock": 50,
+  "category": {
+    "$oid": "67c8ccb36f48fda68723b156"
+  },
+  "status": true,
+  "createdAt": {
+    "$date": "2025-03-05T22:17:36.632Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-05T22:17:36.632Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67c8cd936f48fda68723b168"
+  },
+  "name": "Laptop Dell XPS 13",
+  "description": "Laptop Dell XPS 13 con procesador Intel i7, 16GB de RAM y pantalla táctil 4K.",
+  "price": 35000,
+  "stock": 30,
+  "category": {
+    "$oid": "67c8ccc16f48fda68723b15a"
+  },
+  "status": true,
+  "createdAt": {
+    "$date": "2025-03-05T22:17:55.830Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-05T22:17:55.830Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67c8cdb76f48fda68723b16b"
+  },
+  "name": "Samsung Galaxy S22",
+  "description": "Smartphone Samsung Galaxy S22 con cámara de 50MP y pantalla AMOLED de 6.1 pulgadas.",
+  "price": 22000,
+  "stock": 80,
+  "category": {
+    "$oid": "67c8ccc86f48fda68723b15e"
+  },
+  "status": true,
+  "createdAt": {
+    "$date": "2025-03-05T22:18:31.660Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-05T22:18:31.660Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67c8cdd36f48fda68723b16e"
+  },
+  "name": "Bose SoundLink Revolve+",
+  "description": "Altavoz inalámbrico Bose SoundLink Revolve+ con sonido 360 grados y resistencia al agua.",
+  "price": 12000,
+  "stock": 100,
+  "category": {
+    "$oid": "67c8ccd26f48fda68723b162"
+  },
+  "status": true,
+  "createdAt": {
+    "$date": "2025-03-05T22:18:59.292Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-05T22:18:59.292Z"
+  }
+}]

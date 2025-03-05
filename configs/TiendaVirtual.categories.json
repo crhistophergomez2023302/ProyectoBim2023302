@@ -1,0 +1,48 @@
+[{
+  "_id": {
+    "$oid": "67c8c1f4c52c4c91c63c5a3b"
+  },
+  "name": "Sin categoria",
+  "description": "Otra categoria",
+  "status": true
+},
+{
+  "_id": {
+    "$oid": "67c8c21bc52c4c91c63c5a42"
+  },
+  "name": "Comida",
+  "description": "Embutidos ",
+  "status": true
+},
+{
+  "_id": {
+    "$oid": "67c8ccb36f48fda68723b156"
+  },
+  "name": "Electrodomésticos",
+  "description": "Aparatos para el hogar como neveras, lavadoras y microondas.",
+  "status": true
+},
+{
+  "_id": {
+    "$oid": "67c8ccc16f48fda68723b15a"
+  },
+  "name": "Computadoras",
+  "description": "Equipos electrónicos destinados al procesamiento de información, como laptops y PCs.",
+  "status": true
+},
+{
+  "_id": {
+    "$oid": "67c8ccc86f48fda68723b15e"
+  },
+  "name": "Telefonía",
+  "description": "Dispositivos móviles como teléfonos inteligentes y accesorios relacionados.",
+  "status": true
+},
+{
+  "_id": {
+    "$oid": "67c8ccd26f48fda68723b162"
+  },
+  "name": "Audio y Video",
+  "description": "Equipos de sonido y reproducción de video como televisores, altavoces y reproductores.",
+  "status": true
+}]

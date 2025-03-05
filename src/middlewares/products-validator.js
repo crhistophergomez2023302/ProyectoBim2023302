@@ -20,8 +20,6 @@ export const addProductValidator = [
 export const deleteProductValidator = [
     validateJWT,
     hasRoles("ADMIN_ROLE"),
-    param("id").isMongoId().withMessage("No es un ID válido de MongoDB"),
-    param("id").custom(),
     validarCampos,
     handleErrors
 ];
