@@ -1,3 +1,4 @@
+import Category from "../category/category.model.js"
 import User from "../user/user.model.js"
 
 export const emailExists = async (email = "") => {
@@ -15,7 +16,7 @@ export const usernameExists = async (username = "") => {
 }
 
 export const userExists = async (uid = "") => {
-    const existe = await User.findById(uid)
+    const existe = await User.findOne(uid)
     console.log(existe)
     if(!existe){
         throw new Error("No existe el usuario con el ID proporcionado")
@@ -33,5 +34,12 @@ export const isAdminRole = async (uid = "") => {
     const isAdmin = await User.findById(uid)
     if(isAdmin.role === "ADMIN_ROLE"){
         throw new Error("No tiene permisos para actualizar a otro administrador")
+    }
+}
+
+export const categoryExists = async (name = "") => {
+    const existe = await Category.findOne({name})
+    if(existe){
+        throw new Error(`La categoría ${name} ya ha sido registrada`)
     }
 }

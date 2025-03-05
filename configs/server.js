@@ -9,6 +9,8 @@ import apiLimiter from "../src/middlewares/rate-limit-validator.js";
 import authRoutes from "../src/auth/auth.routes.js"
 import createAdmin from "../src/auth/auth.controller.js";
 import userRoutes from "../src/user/user.routes.js";
+import categoryRoutes from "../src/category/category.routes.js";
+import createcategory from "../src/category/category.controller.js";
 
 const middlewares = (app) => {
     app.use(express.urlencoded({ extended: false }));
@@ -22,6 +24,7 @@ const middlewares = (app) => {
 const routes = (app) => {
     app.use("/tiendaVirtual/v1/auth", authRoutes); 
     app.use("/tiendaVirtual/v1/user", userRoutes);
+    app.use("/tiendaVirtual/v1/category", categoryRoutes);
 };
 
 const conectarDB = async () => {
@@ -37,6 +40,7 @@ export const initServer = () => {
     const app = express();
     try {
         createAdmin();
+        createcategory();
         middlewares(app);
         conectarDB();
         routes(app);

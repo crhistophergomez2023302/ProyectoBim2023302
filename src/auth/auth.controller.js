@@ -8,8 +8,6 @@ export const register = async (req, res) => {
         const encryptedPassword = await hash(data.password)
         data.password = encryptedPassword
 
-        data.role = "CLIENT_ROLE";
-
         const user = await User.create(data);
 
         return res.status(201).json({
