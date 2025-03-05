@@ -3,37 +3,30 @@ import User from "./user.model.js";
 
 export const getUserById = async (req, res) => {
     try {
-        const { usuario } = req;
-        const { uid } = req.params;
-
-        if(!usuario || usuario.role !== "ADMIN_ROLE"){
-            return res.status(401).json({
-                success: false,
-                message: "Acceso denegado. se requiere que el rol sea admin"
-            })
-        }
-
-        const user = await User.findById(uid);
+        const { id } = req.params;
+        const user = await User.findById(id);
 
         if (!user) {
-            return res.status(404).json({
-                success: false,
-                message: "Usuario no encontrado"
-            });
+            return res.status(404).json({ message: "Usuario no encontrado." });
         }
 
         return res.status(200).json({
-            success: true,
-            user
+            message: "Detalles del usuario obtenidos exitosamente.",
+            user: {
+            name: user.name,
+            email: user.email,
+            username: user.username,
+            role: user.role,
+            status: user.status,
+            },
         });
     } catch (err) {
         return res.status(500).json({
-            success: false,
-            message: "Error al obtener el usuario",
-            error: err.message
+            message: "Error al obtener los detalles del usuario.",
+            error: err.message,
         });
     }
-};
+  };
 
 export const getUsers = async (req, res) => {
     try {
@@ -63,17 +56,9 @@ export const getUsers = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
     try {
-        const { uid } = req.params;
+        const { id } = req.params;
 
-        if(uid.role === "ADMIN_ROLE") {
-            return res.status(400).json({
-                success: false,
-                message: "No puedes eliminar a un administrador"
-            });
-
-        }
-
-        const user = await User.findByIdAndUpdate(uid, { status: false }, { new: true });
+        const user = await User.findByIdAndUpdate(id, { status: false }, { new: true });
 
         return res.status(200).json({
             success: true,
@@ -91,11 +76,11 @@ export const deleteUser = async (req, res) => {
 
 export const updatePassword = async (req, res) => {
     try{
-        const { uid } = req.params
+        const { id } = req.params
         const { oldPassword } = req.body
         const { newPassword } = req.body
  
-        const user = await User.findById(uid)
+        const user = await User.findById(id)
  
         const matchOldAndOldPassword = await verify(user.password, oldPassword)
  
@@ -123,7 +108,7 @@ export const updatePassword = async (req, res) => {
  
         const encryptedPassword = await hash(newPassword)
  
-        await User.findByIdAndUpdate(uid, {password: encryptedPassword}, {new: true})
+        await User.findByIdAndUpdate(id, {password: encryptedPassword}, {new: true})
  
         return res.status(200).json({
             success: true,
@@ -141,17 +126,14 @@ export const updatePassword = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
-        const { uid } = req.params;
+        const { id } = req.params;
         const data = req.body;
 
-        if(uid.role === "ADMIN_ROLE" && data.role !== "ADMIN_ROLE") {
-            return res.status(400).json({
-                success: false,
-                message: "No puedes cambiar el rol de un administrador"
-            });
+        if (data.password) {
+            data.password = await hash(data.password);
         }
 
-        const updatedUser = await User.findByIdAndUpdate(uid, data, { new: true });
+        const updatedUser = await User.findByIdAndUpdate(id, data, { new: true });
 
         res.status(200).json({
             success: true,
@@ -162,6 +144,35 @@ export const updateUser = async (req, res) => {
         res.status(500).json({
             success: false,
             msg: 'Error al actualizar usuario',
+            error: err.message
+        });
+    }
+};
+
+export const updateUserRole = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { role } = req.body;
+        const userToUpdate = await User.findById(id);
+
+        if(userToUpdate.role === 'ADMIN_ROLE' && role !== 'ADMIN_ROLE') {
+            return res.status(400).json({
+                success: false,
+                msg: 'No tiene permisos para actualizar a otro administrador'
+            });
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(id, { role }, { new: true });
+
+        res.status(200).json({
+            success: true,
+            msg: 'Rol del usuario actualizado',
+            user: updatedUser,
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            msg: 'Error al actualizar el rol del usuario',
             error: err.message
         });
     }

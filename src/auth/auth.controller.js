@@ -47,8 +47,8 @@ export const login = async (req, res) => {
                 error: "Contraseña incorrecta"
             })
         }
-        console.log(user._id)
-        const token = await generateJWT(user._id)
+
+        const token = await generateJWT(user.id)
 
         return res.status(200).json({
             message: "Login ha sido realizado exitosamente",
