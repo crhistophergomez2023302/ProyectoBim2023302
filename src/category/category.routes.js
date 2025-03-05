@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { addCategory, deleteCategory, getCategories, updatecategory } from "./category.controller.js";
-import { addCategoryValidator, deleteCategoryValidator, getCategoryValidator, updateCategoryValidator } from "../middlewares/category.validator.js";
+import { addCategory, deleteCategory, getCategoryById, updatecategory } from "./category.controller.js";
+import { addCategoryValidator, deleteCategoryValidator, getCategoryByIdValidator, updateCategoryValidator } from "../middlewares/category-validator.js";
 
 const router = Router();
 
 router.post("/addCategory", addCategoryValidator, addCategory);
 
-router.get("/", getCategoryValidator, getCategories);
+router.get("/findCategory/:id", getCategoryByIdValidator, getCategoryById);
 
 router.delete("/deleteCategory/:id", deleteCategoryValidator, deleteCategory);
 

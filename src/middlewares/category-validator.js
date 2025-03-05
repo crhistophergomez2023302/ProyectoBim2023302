@@ -25,9 +25,11 @@ export const deleteCategoryValidator = [
     handleErrors
 ];
 
-export const getCategoryValidator = [
+export const getCategoryByIdValidator = [
     validateJWT,
     hasRoles("ADMIN_ROLE"),
+    param("id").isMongoId().withMessage("No es un ID válido de MongoDB"), 
+    param("id").custom(categoryExists),
     validarCampos,
     handleErrors
 ];

@@ -10,6 +10,7 @@ import authRoutes from "../src/auth/auth.routes.js"
 import createAdmin from "../src/auth/auth.controller.js";
 import userRoutes from "../src/user/user.routes.js";
 import categoryRoutes from "../src/category/category.routes.js";
+import productRoutes from "../src/products/products.routes.js";
 import createcategory from "../src/category/category.controller.js";
 
 const middlewares = (app) => {
@@ -25,6 +26,7 @@ const routes = (app) => {
     app.use("/tiendaVirtual/v1/auth", authRoutes); 
     app.use("/tiendaVirtual/v1/user", userRoutes);
     app.use("/tiendaVirtual/v1/category", categoryRoutes);
+    app.use("/tiendaVirtual/v1/product", productRoutes);
 };
 
 const conectarDB = async () => {

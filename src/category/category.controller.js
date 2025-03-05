@@ -1,4 +1,5 @@
 import Category from './category.model.js';
+import Product from '../products/products.model.js';
 
 export const addCategory = async (req, res) => {
     try {
@@ -19,47 +20,54 @@ export const addCategory = async (req, res) => {
     }
 }
 
-export const getCategories = async (req, res) => {
+export const getCategoryById = async (req, res) => {
     try {
-        const { limite = 5, desde = 0 } = req.query;
-        const query = { status: true };
-
-        const [total, categories] = await Promise.all([
-            Category.countDocuments(query),
-            Category.find(query)
-                .skip(Number(desde))
-                .limit(Number(limite))
-        ]);
-
-        return res.status(200).json({
-            success: true,
-            total,
-            categories
-        });
-    } catch (err) {
-        return res.status(500).json({
-            success: false,
-            message: "Error al obtener los usuarios",
-            error: err.message
-        });
-    }
+            const { id } = req.params;
+            const category = await Category.findById(id);
+    
+            if (!category) {
+                return res.status(404).json({ message: "Categoria no encontrada." });
+            }
+    
+            return res.status(200).json({
+                message: "Detalles del la categoria obtenidos exitosamente.",
+                category: {
+                name: category.name,
+                description: category.description,
+                status: category.status,
+                },
+            });
+        } catch (err) {
+            return res.status(500).json({
+                message: "Error al obtener los detalles del la category.",
+                error: err.message,
+            });
+        }
 };
 
 export const deleteCategory = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const category= await Category.findByIdAndUpdate(id, { status: false }, { new: true });
+        const category = await Category.findByIdAndUpdate(id, { status: false }, { new: true });
+
+        if(!category){
+            return res.status(404).json({
+                success: false,
+                message: "Categoria no encontrada",
+                error: err.message
+            });
+        }
 
         return res.status(200).json({
             success: true,
-            message: "Usuario eliminado",
+            message: "Categoria eliminada",
             category
         });
     } catch (err) {
         return res.status(500).json({
             success: false,
-            message: "Error al eliminar el usuario",
+            message: "Error al eliminar la categoria",
             error: err.message
         });
     }
@@ -70,17 +78,25 @@ export const updatecategory = async (req, res) => {
         const { id } = req.params;
         const data = req.body;
 
-        const updatedUser = await User.findByIdAndUpdate(id, data, { new: true });
+        const updateCategory = await Category.findByIdAndUpdate(id, data, { new: true });
+
+        if (!updateCategory) {
+            return res.status(404).json({
+                success: false,
+                msg: 'Categoria no encontrada',
+                error: err.message
+            });
+        }
 
         res.status(200).json({
             success: true,
-            msg: 'Usuario Actualizado',
-            user: updatedUser,
+            msg: 'Categoria Actualizada',
+            category: updateCategory,
         });
     } catch (err) {
         res.status(500).json({
             success: false,
-            msg: 'Error al actualizar usuario',
+            msg: 'Error al actualizar categoria',
             error: err.message
         });
     }
